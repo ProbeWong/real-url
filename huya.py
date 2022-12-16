@@ -45,15 +45,15 @@ def get_real_url(room_id):
             else:
                 liveline = live(liveline)
                 real_url = ("https:" + liveline).replace("hls", "flv").replace("m3u8", "flv")
+                real_url = re.findall(r'^(.*?)&ctype',real_url)[0]
         else:
             real_url = '未开播或直播间不存在'
     except:
         real_url = '未开播或直播间不存在'
     return real_url
 
-
-rid = input('输入虎牙直播房间号：\n')
-real_url = get_real_url(rid)
-real_url = re.findall(r'^(.*?)&ctype',real_url)[0]
-print('该直播间源地址为：')
-print(real_url)
+if __name__ == '__main__':
+    rid = input('输入虎牙直播房间号：\n')
+    real_url = get_real_url(rid)
+    print('该直播间源地址为：')
+    print(real_url)
